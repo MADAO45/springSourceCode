@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+	<bean class="org.springframework.own.bean.InitBean1">
+		<property name="filed1" value="字段1"/>
+		<property name="filed2" value="字段2"/>
+	</bean>
+</beans>
