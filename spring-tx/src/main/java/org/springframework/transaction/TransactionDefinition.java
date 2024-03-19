@@ -43,6 +43,21 @@ import org.springframework.lang.Nullable;
  */
 public interface TransactionDefinition {
 
+
+	/**
+	*
+	 * 强制事务型
+	 * PROPAGATION_REQUIRES_NEW：创建一个新的事务，并暂停外部的事务（如果有的话）。
+	 * PROPAGATION_NESTED：如果当前存在事务，则在一个嵌套事务内执行；如果当前没有事务，则创建一个事务。
+	 * PROPAGATION_MANDATORY:支持当前事务，如果当前存在事务，则加入该事务；如果当前不存在事务，则抛出异常。
+	 * PROPAGATION_REQUIRED：如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。
+	 * 强制非事务
+	 * PROPAGATION_NEVER:以非事务方式执行，如果当前存在事务，则抛出异常。
+	 * PROPAGATION_NOT_SUPPORTED：以非事务方式执行操作，如果当前存在事务，则暂停当前事务。
+	 * 无所谓型
+	 * PROPAGATION_SUPPORTS：支持当前事务，如果当前存在事务，则加入该事务；如果当前不存在事务，则以非事务方式执行。
+	*/
+
 	/**
 	 * Support a current transaction; create a new one if none exists.
 	 * Analogous to the EJB transaction attribute of the same name.
