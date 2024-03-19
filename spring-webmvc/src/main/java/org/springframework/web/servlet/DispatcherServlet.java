@@ -1045,13 +1045,22 @@ public class DispatcherServlet extends FrameworkServlet {
 				multipartRequestParsed = (processedRequest != request);
 
 				// Determine handler for the current request.
+				// 解析请求url 匹配 requestMapping
 				mappedHandler = getHandler(processedRequest);
+				//未命中，返回空
 				if (mappedHandler == null) {
 					noHandlerFound(processedRequest, response);
 					return;
 				}
 
 				// Determine handler adapter for the current request.
+				/* 根据你的url在requestMapping的注册类型去匹配不同的适配器，
+				*1.impleServletHandlerAdapter：适配Servlet类型的处理器方法。
+				*2.HttpMessageHandlerAdapter：适配处理HTTP请求的处理器方法，通常用于处理webflux中的请求
+				*3.RequestMappingHandlerAdapter：是Spring MVC中默认的适配器，适配标记有@Controller和@RequestMapping注解的处理器方法。
+				*4.AsyncTaskMethodAdapter：适配异步方法，如使用@Async注解的方法。
+				* 每种HandlerAdapter都有其特定的用途，Spring MVC根据请求的处理方法选择合适的HandlerAdapter来处理请求。
+				*/
 				HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());
 
 				// Process last-modified header, if supported by the handler.
@@ -1069,6 +1078,7 @@ public class DispatcherServlet extends FrameworkServlet {
 				}
 
 				// Actually invoke the handler.
+				// 调用实际处理程序
 				mv = ha.handle(processedRequest, response, mappedHandler.getHandler());
 
 				if (asyncManager.isConcurrentHandlingStarted()) {
